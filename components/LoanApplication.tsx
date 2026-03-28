@@ -101,7 +101,7 @@ export default function LoanApplication() {
 
         const formPayload = new FormData();
         Object.entries(formData).forEach(([key, value]) => {
-            if (value instanceof File) formPayload.append(key, value);
+            if ((value as unknown) instanceof File) formPayload.append(key, value as unknown as File);
             else formPayload.append(key, value as string);
         });
 
@@ -171,7 +171,7 @@ export default function LoanApplication() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 relative min-h-[400px]">
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence mode="wait">
                     {currentStep === 0 && (
                         <motion.div key="step1" variants={variants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
                             <StepContainer>

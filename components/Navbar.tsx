@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function Navbar(): JSX.Element{
+export default function Navbar() {
   const [open, setOpen] = useState<boolean>(false);
 
   return (

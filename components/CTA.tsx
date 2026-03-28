@@ -21,7 +21,7 @@ export default function CTA() {
 
         {/* Subtext */}
         <p className="text-lg md:text-xl text-green-100 mb-10 leading-relaxed">
-          Join over 15,000 people who have used EasyPayLoan to access fast, fair, and transparent financing. Free application, 10 minutes.
+          Join over 15,000 people who have used FashCash to access fast, fair, and transparent financing. Free application, 10 minutes.
         </p>
 
         {/* CTA Button */}
