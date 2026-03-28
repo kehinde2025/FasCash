@@ -8,7 +8,7 @@ import Process from "@/components/Process";
 import LoanApplication from "@/components/LoanApplication";
 import Stats from "@/components/StatsBar";
 
-export default function Home(): JSX.Element {
+export default function Home() {
   return (
     <main>
       <Hero />
