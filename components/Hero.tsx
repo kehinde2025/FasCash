@@ -1,15 +1,16 @@
-import { 
-  BoltIcon, 
-  CurrencyDollarIcon, 
-  UserGroupIcon, 
-  StarIcon, 
-  ShieldCheckIcon, 
-  BanknotesIcon, 
-  CheckBadgeIcon, 
-  IdentificationIcon, 
-  GlobeAmericasIcon, 
-  CalendarIcon 
+import {
+  BoltIcon,
+  CurrencyDollarIcon,
+  UserGroupIcon,
+  StarIcon,
+  ShieldCheckIcon,
+  BanknotesIcon,
+  CheckBadgeIcon,
+  IdentificationIcon,
+  GlobeAmericasIcon,
+  CalendarIcon
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -45,9 +46,9 @@ export default function Hero() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mt-10 justify-center">
-            <button className="px-8 py-3.5 bg-green-800 text-white rounded-full hover:bg-green-900 transition font-medium shadow-lg">
+            <Link href="#loanapplication" className="px-8 py-3.5 bg-green-800 text-white rounded-full hover:bg-green-900 transition font-medium shadow-lg text-center">
               Apply in 10 Minutes
-            </button>
+            </Link>
             <button className="px-8 py-3.5 border border-gray-300 text-gray-800 rounded-full hover:bg-gray-100 transition font-medium shadow-sm">
               See the Process
             </button>

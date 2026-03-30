@@ -19,7 +19,9 @@ export default function Home() {
       <ClientReviews />
       <FAQ />
       <CTA />
-      <LoanApplication />
+      <div id="loanapplication">
+        <LoanApplication />
+      </div>
     </main>
   );
 }

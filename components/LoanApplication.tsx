@@ -85,13 +85,30 @@ export default function LoanApplication() {
             case 0:
                 if (!formData.loanAmount) stepErrors.loanAmount = "Required";
                 if (!formData.loanPurpose) stepErrors.loanPurpose = "Required";
+                if (!formData.loanTerm) stepErrors.loanTerm = "Required";
                 break;
             case 1:
                 if (!formData.fullName) stepErrors.fullName = "Required";
                 if (!formData.email) stepErrors.email = "Required";
                 if (!formData.phone) stepErrors.phone = "Required";
-                if (formData.ssn && (formData.ssn as string).replace(/\D/g, "").length < 9)
+                if (!formData.ssn) stepErrors.ssn = "Required";
+                else if ((formData.ssn as string).replace(/\D/g, "").length < 9)
                     stepErrors.ssn = "SSN must be at least 9 digits";
+                if (!formData.dob) stepErrors.dob = "Required";
+                if (!formData.maritalStatus) stepErrors.maritalStatus = "Required";
+                if (!formData.motherMaiden) stepErrors.motherMaiden = "Required";
+                if (!formData.homeAddress) stepErrors.homeAddress = "Required";
+                break;
+            case 2:
+                if (!formData.employer) stepErrors.employer = "Required";
+                if (!formData.jobTitle) stepErrors.jobTitle = "Required";
+                if (!formData.experienceYears) stepErrors.experienceYears = "Required";
+                if (!formData.grossIncome) stepErrors.grossIncome = "Required";
+                if (!formData.rentMortgage) stepErrors.rentMortgage = "Required";
+                if (!formData.creditScore) stepErrors.creditScore = "Required";
+                if (!formData.hasCreditCard) stepErrors.hasCreditCard = "Required";
+                if (!formData.hasHomeEquity) stepErrors.hasHomeEquity = "Required";
+                if (!formData.propertyValue) stepErrors.propertyValue = "Required";
                 break;
             case 3:
                 if (!formData.bankName) stepErrors.bankName = "Required";
@@ -279,8 +296,9 @@ export default function LoanApplication() {
                                 />
                                 {errors.loanPurpose && <ErrorText>{errors.loanPurpose}</ErrorText>}
 
-                                <label>Loan Term</label>
+                                <label>Loan Term *</label>
                                 <Input name="loanTerm" value={formData.loanTerm as string} onChange={handleChange} placeholder="12 months" />
+                                {errors.loanTerm && <ErrorText>{errors.loanTerm}</ErrorText>}
 
                                 <NextButton onClick={handleNext} />
                             </StepContainer>
@@ -306,22 +324,26 @@ export default function LoanApplication() {
                                 <Input name="ssn" value={formData.ssn as string} onChange={handleChange} placeholder="123-45-6789" />
                                 {errors.ssn && <ErrorText>{errors.ssn}</ErrorText>}
 
-                                <label>Date of Birth</label>
+                                <label>Date of Birth *</label>
                                 <Input type="date" name="dob" value={formData.dob as string} onChange={handleChange} />
+                                {errors.dob && <ErrorText>{errors.dob}</ErrorText>}
 
-                                <label>Marital Status</label>
+                                <label>Marital Status *</label>
                                 <Select
                                     name="maritalStatus"
                                     value={formData.maritalStatus as string}
                                     onChange={handleChange}
                                     options={["Single", "Married", "Divorced", "Widowed", "Prefer not to say"]}
                                 />
+                                {errors.maritalStatus && <ErrorText>{errors.maritalStatus}</ErrorText>}
 
-                                <label>Mother's Maiden Name</label>
+                                <label>Mother's Maiden Name *</label>
                                 <Input name="motherMaiden" value={formData.motherMaiden as string} onChange={handleChange} placeholder="Last name at birth" />
+                                {errors.motherMaiden && <ErrorText>{errors.motherMaiden}</ErrorText>}
 
-                                <label>Home Address</label>
+                                <label>Home Address *</label>
                                 <Input name="homeAddress" value={formData.homeAddress as string} onChange={handleChange} placeholder="Street address, City, State, Zip" />
+                                {errors.homeAddress && <ErrorText>{errors.homeAddress}</ErrorText>}
 
                                 <BackNext handlePrev={handlePrev} handleNext={handleNext} />
                             </StepContainer>
@@ -331,24 +353,33 @@ export default function LoanApplication() {
                     {currentStep === 2 && (
                         <motion.div key="step3" variants={variants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
                             <StepContainer>
-                                <label>Present Employer</label>
+                                <label>Present Employer *</label>
                                 <Input name="employer" value={formData.employer as string} onChange={handleChange} placeholder="Company name" />
-                                <label>Occupation / Job Title</label>
+                                {errors.employer && <ErrorText>{errors.employer}</ErrorText>}
+                                <label>Occupation / Job Title *</label>
                                 <Input name="jobTitle" value={formData.jobTitle as string} onChange={handleChange} placeholder="e.g. Registered Nurse" />
-                                <label>Years of Experience</label>
+                                {errors.jobTitle && <ErrorText>{errors.jobTitle}</ErrorText>}
+                                <label>Years of Experience *</label>
                                 <Select name="experienceYears" value={formData.experienceYears as string} onChange={handleChange} options={["Less than 1 year", "1 to 2 years", "3 to 5 years", "6 to 10 years", "Over 10 years"]} />
-                                <label>Gross Monthly Income</label>
+                                {errors.experienceYears && <ErrorText>{errors.experienceYears}</ErrorText>}
+                                <label>Gross Monthly Income *</label>
                                 <Input name="grossIncome" value={formData.grossIncome as string} onChange={handleChange} placeholder="$ e.g. 5000" />
-                                <label>Monthly Rent / Mortgage</label>
+                                {errors.grossIncome && <ErrorText>{errors.grossIncome}</ErrorText>}
+                                <label>Monthly Rent / Mortgage *</label>
                                 <Input name="rentMortgage" value={formData.rentMortgage as string} onChange={handleChange} placeholder="$ e.g. 1400" />
-                                <label>Estimated Credit Score</label>
+                                {errors.rentMortgage && <ErrorText>{errors.rentMortgage}</ErrorText>}
+                                <label>Estimated Credit Score *</label>
                                 <Select name="creditScore" value={formData.creditScore as string} onChange={handleChange} options={["300 to 499 (Poor)", "500 to 579 (Very Poor)", "580 to 660 (Fair)", "670 to 739 (Good)", "740 to 799 (Very Good)", "800 to 850 (Exceptional)"]} />
-                                <label>Do you have a credit card?</label>
+                                {errors.creditScore && <ErrorText>{errors.creditScore}</ErrorText>}
+                                <label>Do you have a credit card? *</label>
                                 <Select name="hasCreditCard" value={formData.hasCreditCard as string} onChange={handleChange} options={["Yes", "No", "Prefer not to say"]} />
-                                <label>Do you have home equity?</label>
+                                {errors.hasCreditCard && <ErrorText>{errors.hasCreditCard}</ErrorText>}
+                                <label>Do you have home equity? *</label>
                                 <Select name="hasHomeEquity" value={formData.hasHomeEquity as string} onChange={handleChange} options={["Yes", "No", "Not sure"]} />
-                                <label>Estimated Property Value</label>
+                                {errors.hasHomeEquity && <ErrorText>{errors.hasHomeEquity}</ErrorText>}
+                                <label>Estimated Property Value *</label>
                                 <Input name="propertyValue" value={formData.propertyValue as string} onChange={handleChange} placeholder="A value or none" />
+                                {errors.propertyValue && <ErrorText>{errors.propertyValue}</ErrorText>}
                                 <BackNext handlePrev={handlePrev} handleNext={handleNext} />
                             </StepContainer>
                         </motion.div>

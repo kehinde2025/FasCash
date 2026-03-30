@@ -37,7 +37,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           <a href="#" className="text-sm text-white hover:text-gray-200 transition">
-            Why Choose Us
+            Advantage
           </a>
           <a href="#" className="text-sm text-white hover:text-gray-200 transition">
             How It Works
