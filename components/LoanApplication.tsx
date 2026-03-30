@@ -56,7 +56,7 @@ export default function LoanApplication() {
                     if (typeof value === "string" || value === null) safeData[key] = value as string | null;
                 });
                 setFormData((prev) => ({ ...prev, ...safeData }));
-            } catch {}
+            } catch { }
         }
     }, []);
 
@@ -76,7 +76,20 @@ export default function LoanApplication() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, files } = e.target as HTMLInputElement;
-        setFormData({ ...formData, [name]: files ? files[0] : value });
+
+        if (files && files[0]) {
+            const file = files[0];
+
+            // ✅ FIX: file size limit
+            if (file.size > 5 * 1024 * 1024) {
+                alert("File too large. Max 5MB");
+                return;
+            }
+
+            setFormData({ ...formData, [name]: file });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const validateStep = () => {
@@ -146,7 +159,17 @@ export default function LoanApplication() {
                 body: formPayload,
             });
 
-            const result = await res.json();
+            const text = await res.text();
+
+            let result;
+            try {
+                result = JSON.parse(text);
+            } catch {
+                console.error("Server returned non-JSON:", text);
+                alert("Upload failed. File may be too large.");
+                setIsSubmitting(false);
+                return;
+            }
 
             if (!res.ok || !result.ok) {
                 alert(`Submission failed: ${result.error || "Unknown error"}`);
