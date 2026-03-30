@@ -26,7 +26,7 @@ export default function Footer() {
 
             {/* Brand Name */}
             <span className="text-xl font-bold text-white select-none">
-              FastCash
+              FastCashLoan
             </span>
           </div>
           <p className="text-sm leading-relaxed">
@@ -80,7 +80,7 @@ export default function Footer() {
       <div className="border-t border-gray-700 mt-10 pt-6 text-sm text-white text-center space-y-3">
 
         <p>
-          © 2019–{new Date().getFullYear()} FastCash. FastCash Financial Corp. All rights reserved.
+          © 2019–{new Date().getFullYear()} FastCashLoan. FastCashLoan Financial Corp. All rights reserved.
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
@@ -93,7 +93,7 @@ export default function Footer() {
         <p className="max-w-3xl mx-auto text-xs leading-relaxed">
           APR ranges from 5.99% to 24.99%. Loan amounts from $1,000 to $80,000.
           Repayment terms 12–60 months. All loans subject to credit approval.
-          FastCash Financial Corp, NMLS #195624.
+          FastCashLoan Financial Corp, NMLS #195624.
         </p>
 
       </div>

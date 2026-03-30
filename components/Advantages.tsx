@@ -15,7 +15,7 @@ export default function Advantages() {
         </h2>
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed">
           Built to Remove Financial Barriers<br/>
-          Traditional lenders turn away millions of qualified borrowers every year over technicalities. We built FastCash to fix that — permanently.
+          Traditional lenders turn away millions of qualified borrowers every year over technicalities. We built FastCashLoan to fix that — permanently.
         </p>
 
         {/* Advantages Grid */}

@@ -30,7 +30,7 @@ export default function Navbar() {
 
       {/* Brand Name */}
       <span className="text-xl font-bold text-white select-none">
-        FastCash
+        FastCashLoan
       </span>
     </div>
 

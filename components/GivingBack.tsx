@@ -8,7 +8,7 @@ export default function GivingBack() {
     {
       number: "02",
       title: "We match your loan",
-      description: "SwiftLoan separately funds twice the loan amount from our resources.",
+      description: "FashCashLoan separately funds twice the loan amount from our resources.",
     },
     {
       number: "03",
@@ -42,7 +42,7 @@ export default function GivingBack() {
             The Giving Back Initiative
           </h3>
           <p className="text-lg md:text-xl text-gray-700 mb-10 leading-relaxed">
-            At SwiftLoan, approving your loan is only half the story. We commit an equal amount from our own resources to supporting families in crisis.
+            At FasCashLoan, approving your loan is only half the story. We commit an equal amount from our own resources to supporting families in crisis.
           </p>
 
           {/* Steps Timeline */}

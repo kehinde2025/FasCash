@@ -3,19 +3,19 @@ import { StarIcon } from "@heroicons/react/24/solid";
 export default function ClientReviews() {
   const reviews = [
     {
-      quote: "My local bank rejected me twice. FastCash approved my $8,000 application within hours. The money was in my account the following morning.",
+      quote: "My local bank rejected me twice. FastCashLoan approved my $8,000 application within hours. The money was in my account the following morning.",
       initials: "SM",
       name: "Sarah M.",
       location: "Phoenix, AZ",
     },
     {
-      quote: "After a medical emergency wrecked my credit score, FashCash assessed my current income, approved my request, and charged zero interest.",
+      quote: "After a medical emergency wrecked my credit score, FashCashLoan assessed my current income, approved my request, and charged zero interest.",
       initials: "JT",
       name: "James T.",
       location: "Atlanta, GA",
     },
     {
-      quote: "What set FastCash apart was transparency. My specialist walked me through every line of the agreement. No jargon, no surprises.",
+      quote: "What set FastCashLoan apart was transparency. My specialist walked me through every line of the agreement. No jargon, no surprises.",
       initials: "MR",
       name: "Maria R.",
       location: "Los Angeles, CA",

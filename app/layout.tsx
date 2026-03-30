@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "SwiftLoan",
+  title: "FasCash",
   description: "Fast, fair, and transparent personal loans",
 };
 

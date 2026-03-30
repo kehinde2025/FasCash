@@ -23,9 +23,9 @@ export default function FAQ() {
         "Same-day approval is common for applications before 2 PM Eastern. Once you e-sign, funds are dispatched via ACH and typically clear your account by the next business day.",
     },
     {
-      question: "Is FashCash legitimate?",
+      question: "Is FashCashLoan legitimate?",
       answer:
-        "Yes. FashCash has been operating since 2019, is registered with NMLS (#123456), holds BBB A+ accreditation, and is FDIC compliant. We never request upfront payments or gift cards.",
+        "Yes. FashCashLoan has been operating since 2019, is registered with NMLS (#195624), holds BBB A+ accreditation, and is FDIC compliant. We never request upfront payments or gift cards.",
     },
     {
       question: "What can I use the loan for?",
