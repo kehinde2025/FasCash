@@ -9,15 +9,24 @@ export default function Navbar() {
     <nav className="w-full sticky top-0 z-50 bg-gradient-to-r from-green-600 via-green-700 to-green-800 shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-        {/* Logo */}
+       {/* Logo */}
         <div className="flex items-center gap-2">
-          {/* Icon: lightning bolt for speed */}
-          <div className="relative w-9 h-9 flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 shadow-md"></div>
-
-            {/* Dollar Sign */}
-            <span className="relative text-white font-bold text-sm">$</span>
-          </div>
+      {/* Icon: lightning bolt for speed */}
+      <div className="bg-amber-400 rounded-full w-8 h-8 flex items-center justify-center shadow-md">
+        <svg
+          className="w-4 h-4 text-green-800"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          />
+        </svg>
+      </div>
 
           {/* Brand Name */}
           <span className="text-xl font-bold text-white select-none">
