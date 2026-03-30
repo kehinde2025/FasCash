@@ -81,7 +81,7 @@ export default function LoanApplication() {
             const file = files[0];
 
             // ✅ FIX: file size limit
-            if (file.size >50 * 1024 * 1024) {
+            if (file.size >20 * 1024 * 1024) {
                 alert("File too large. Max 5MB");
                 return;
             }
