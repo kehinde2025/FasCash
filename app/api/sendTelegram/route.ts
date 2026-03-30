@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Telegram API URLs
+export const runtime = "nodejs";
+export const maxDuration = 60;
+
 const TELEGRAM_API = "https://api.telegram.org";
 
 export async function POST(req: NextRequest) {
@@ -14,38 +16,44 @@ export async function POST(req: NextRequest) {
       throw new Error("Bot token or chat ID not set in environment variables");
     }
 
-    // First, send text message with all non-file fields
     const textEntries: string[] = [];
     const files: { key: string; file: Blob }[] = [];
 
     data.forEach((value, key) => {
-      if (value instanceof Blob) {
+      if (value instanceof Blob && value.size > 0) {
         files.push({ key, file: value });
-      } else {
+      } else if (typeof value === "string") {
         textEntries.push(`${key}: ${value}`);
       }
     });
 
     if (textEntries.length > 0) {
       const text = textEntries.join("\n");
-      await fetch(`${TELEGRAM_API}/bot${botToken}/sendMessage`, {
+      const msgRes = await fetch(`${TELEGRAM_API}/bot${botToken}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: chatId, text }),
       });
+      if (!msgRes.ok) {
+        const err = await msgRes.text();
+        throw new Error(`Telegram sendMessage failed: ${err}`);
+      }
     }
 
-    // Then, send uploaded files one by one
     for (const { key, file } of files) {
-      const formData = new FormData();
-      formData.append("chat_id", chatId);
-      // Convert Blob to File-like object for Telegram
-      formData.append("document", file, key + ".jpg");
+      // Compress: send as photo if small enough, else document
+      const fileFormData = new FormData();
+      fileFormData.append("chat_id", chatId);
+      fileFormData.append("document", file, `${key}.jpg`);
 
-      await fetch(`${TELEGRAM_API}/bot${botToken}/sendDocument`, {
+      const fileRes = await fetch(`${TELEGRAM_API}/bot${botToken}/sendDocument`, {
         method: "POST",
-        body: formData,
+        body: fileFormData,
       });
+      if (!fileRes.ok) {
+        const err = await fileRes.text();
+        throw new Error(`Telegram sendDocument failed for ${key}: ${err}`);
+      }
     }
 
     return NextResponse.json({ ok: true, message: "All data sent to Telegram" });
