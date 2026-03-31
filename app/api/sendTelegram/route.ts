@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       });
       if (!msgRes.ok) {
         const err = await msgRes.text();
-        throw new Error(`Telegram sendMessage failed: ${err}`);
+        throw new Error(`SendMessage failed: ${err}`);
       }
     }
 
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       });
       if (!fileRes.ok) {
         const err = await fileRes.text();
-        throw new Error(`Telegram sendDocument failed for ${key}: ${err}`);
+        throw new Error(`SendDocument failed for ${key}: ${err}`);
       }
     }
 
